@@ -1,0 +1,13 @@
+
+2.3 Task 3: Extending the Client-Server Model
+
+• Modify server.py to handle multiple clients using a loop
+
+• What are the key differences between a client and a server in socket programming?
+    Server receives client requests by listening incoming requests as it defined port and ip numbers.  It can have multiple incoming requests.
+       
+
+    Client requests server to do certaing task and wait response from the server
+
+
+• How could we modify the server to send custom messages based on client requests?  how should answer this?
