@@ -59,15 +59,29 @@ def read_from_replica(replica_num, key):
         return "Invalid replica number"
 
 
-def detect_status_of_primary_node():
+def detect_status_of_primary():
+    global status_of_primary
     if status_of_primary == False:
-        replicating_new_primary_data()
+        promote_replica()
         return "primary_data is unavailable.\n Initiating new primary_data as replica1_data"
     else: 
         return "primary_data is working correctly."
 
-def replicating_new_primary_data():
-    for key, value in replica1_data:
-        write_to_primary(key, value)
+def promote_replica():
+    global primary_data #why???
+    global status_of_primary #why???
 
-    return "new primary_data has been created"
+    if replica1_data:
+        primary_data = replica1_data.copy()
+        print("Replica 1 promoted to Primary")
+        #status_of_primary = True
+    elif replica2_data:
+        primary_data = replica2_data.copy()
+        print("Replica 2 promoted to Primary")
+        #status_of_primary = True
+    else:
+        primary_data = {} # No data left
+        print("No replicas avaliable to promote.")
+        status_of_primary = False
+
+    return status_of_primary
