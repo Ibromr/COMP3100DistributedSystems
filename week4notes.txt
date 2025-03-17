@@ -34,8 +34,9 @@ def replicate_to_replicas():
         
         # After replication, clear the log to avoid redundant replication
         replication_log.clear()
+        return "Replication_log is cleared."
         
-        return "Replication completed"
+        return "Replication completed."
     else:
         return "No changes to replicate"
 Steps to Follow in This Code:

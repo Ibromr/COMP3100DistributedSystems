@@ -1,5 +1,5 @@
-from primary_replica_replication import (primary_data, replica1_data, replica2_data, replication_log, 
-                                         write_to_primary, replicate_to_replicas, read_from_primary, read_from_replica)
+from primary_replica_replication import (primary_data, replica1_data, replica2_data, replication_log, status_of_primary,
+                                         write_to_primary, replicate_to_replicas, read_from_primary, read_from_replica, detect_status_of_primary_node, replicating_new_primary_data)
 
 def test_basic_replication():
     """Test basic write and replication functionality."""
@@ -38,3 +38,53 @@ def test_basic_replication():
     print(f"Replica 1 - student2: {read_from_replica(1, 'student2')}")
     print(f"Replica 2 - student1: {read_from_replica(2, 'student1')}")
     print(f"Replica 2 - student3: {read_from_replica(2, 'student3')}")
+
+
+    print("\n====== BASIC STATUS OF FAILURE =======")
+
+    # Simulate primary failure
+    status_of_primary = False
+
+     # Detect primary status
+    status_message = detect_status_of_primary_node()
+    print(status_message)
+
+     # Check data in primary_data after failure
+    print("\nReading from primary_data after Failure:")
+    print(f"student1: {read_from_primary('student1')}")
+    print(f"student2: {read_from_primary('student2')}")
+
+
+
+"""
+def test_status_primary_data():
+         # Initial data
+    write_to_primary('student10', 'Jake')
+    write_to_primary('student11', 'Orland')
+
+    # Simulate primary failure
+    status_of_primary = False
+
+    # Detect primary status
+    status_message = detect_status_of_primary_node()
+    print(status_message)  # Expected: "primary_data is unavailable.\n Initiating new primary_data as replica1_data"
+
+    # Replicate new primary data
+    replication_message = replicating_new_primary_data()
+    print(replication_message)  # Expected: "new primary_data has been created"
+
+    # Verify the new primary data
+    print(read_from_primary('Jake'))  # Expected: "Jake"
+    print(read_from_primary('Orland'))  # Expected: "Orland"
+"""
+
+#if __name__ == "__main__":
+#test_status_primary_data()
+
+test_basic_replication()
+
+
+
+
+
+
